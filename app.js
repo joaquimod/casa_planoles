@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
     { src: 'fotografies/PXL_20260618_113502252.ACTION_PAN-01.jpeg', desc: 'Imatge 9: Passadís principal. Seqüència de finestres interiors altes que distribueixen la llum natural cap al corredor.' },
     { src: 'fotografies/PXL_20260618_113506858.ACTION_PAN-01.jpeg', desc: 'Imatge 10: Cuina original de fusta massissa amb tiradors integrats i revestiment beige.' },
     { src: 'fotografies/PXL_20260618_113509453.ACTION_PAN-01.jpeg', desc: 'Imatge 11: Safareig amb la doble pica profunda clàssica de porcellana i sabonera encastada original.' },
-    { src: 'fotografies/PXL_20260618_113559552.ACTION_PAN-01_GEN 2.jpeg', desc: 'Imatge 12: Dormitori secundari amb terra de moqueta granat d\'època i sostre inclinat de fusta.' },
+    { src: 'fotografies/PXL_20260618_113559552.ACTION_PAN-01_GEN_2.jpeg', desc: 'Imatge 12: Dormitori secundari amb terra de moqueta granat d\'època i sostre inclinat de fusta.' },
     { src: 'fotografies/PXL_20260618_113625956.ACTION_PAN-01.jpeg', desc: 'Imatge 13: Bany original amb rajola granat intens, mirall de vora cromada i pica de porcellana blanca.' },
     { src: 'fotografies/PXL_20260618_113630738.ACTION_PAN-01.jpeg', desc: 'Imatge 14: Dormitori principal. Revestiment de suro al capçal del llit i armaris encastats de fusta noble.' },
     { src: 'fotografies/PXL_20260618_113739302.ACTION_PAN-01.jpeg', desc: 'Imatge 15: Vista interior del passadís il·luminat per les finestres interiors altes, amb terra ceràmic fosc.' },
