@@ -1,0 +1,1051 @@
+/* styles.css - Full d'estils premium per a la web de Casa de Planès */
+
+/* Fonts de Google */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+
+:root {
+  --font-title: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  
+  /* Paleta cromàtica - Harmonia de muntanya (Pissarra, fusta, coure) */
+  --co-slate-dark: #0f172a;      /* Pissarra molt fosca per a textos principals i foscs */
+  --co-slate-medium: #334155;    /* Pissarra mitjana */
+  --co-slate-light: #f1f5f9;     /* Fons clar net */
+  --co-slate-border: #e2e8f0;    /* Línies primes de separació */
+  
+  --co-accent: #c27858;          /* Coure/Argila - accent càlid de l'interiorisme i entorn */
+  --co-accent-hover: #a35d3d;    /* Accent intens en hover */
+  --co-accent-light: #fdf6f0;    /* Fons d'accent molt suau */
+  
+  --co-white: #ffffff;
+  --co-overlay: rgba(15, 23, 42, 0.6);
+  --co-glass-bg: rgba(255, 255, 255, 0.85);
+  --co-glass-border: rgba(255, 255, 255, 0.4);
+  
+  /* Ombres i contorns */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.08), 0 2px 4px -2px rgba(15, 23, 42, 0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.04);
+  
+  /* Amplades de disseny */
+  --sidebar-width: 280px;
+  --max-content-width: 1100px;
+  --transition-speed: 0.3s;
+}
+
+/* Resets i estils base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--co-slate-light);
+  color: var(--co-slate-medium);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-title);
+  color: var(--co-slate-dark);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--co-slate-border);
+  padding-bottom: 0.5rem;
+  position: relative;
+}
+
+h2::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 60px;
+  height: 2px;
+  background-color: var(--co-accent);
+}
+
+h3 {
+  font-size: 1.4rem;
+  margin: 1.5rem 0 1rem 0;
+}
+
+p {
+  margin-bottom: 1.2rem;
+  text-align: justify;
+}
+
+a {
+  color: var(--co-accent);
+  text-decoration: none;
+  transition: color var(--transition-speed);
+}
+
+a:hover {
+  color: var(--co-accent-hover);
+}
+
+ul {
+  list-style: none;
+}
+
+/* Contenidor Principal */
+.app-container {
+  display: flex;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Botó de menú hamburguesa (Només visible en mòbils/tauletes) */
+.menu-toggle {
+  display: none;
+  position: fixed;
+  top: 1.25rem;
+  right: 1.25rem;
+  z-index: 1000;
+  width: 48px;
+  height: 48px;
+  background-color: var(--co-white);
+  border: 1px solid var(--co-slate-border);
+  border-radius: 50%;
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 5px;
+  transition: all var(--transition-speed);
+}
+
+.menu-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.menu-toggle span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background-color: var(--co-slate-dark);
+  transition: transform var(--transition-speed), opacity var(--transition-speed);
+}
+
+/* Estat Actiu de l'Hamburguesa (Es converteix en X) */
+.menu-toggle.active span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Menú lateral de navegació (Sidebar) */
+.sidebar {
+  width: var(--sidebar-width);
+  background-color: var(--co-white);
+  border-right: 1px solid var(--co-slate-border);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  padding: 2.5rem 1.5rem;
+  transition: transform var(--transition-speed) ease;
+}
+
+.sidebar-brand {
+  margin-bottom: 2.5rem;
+}
+
+.sidebar-brand h1 {
+  font-size: 1.6rem;
+  letter-spacing: -0.5px;
+  color: var(--co-slate-dark);
+}
+
+.sidebar-brand p {
+  font-size: 0.85rem;
+  color: var(--co-accent);
+  margin-top: 0.25rem;
+  text-align: left;
+}
+
+.sidebar-menu {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  overflow-y: auto;
+}
+
+.sidebar-menu li a {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  color: var(--co-slate-medium);
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all var(--transition-speed);
+}
+
+.sidebar-menu li a:hover {
+  background-color: var(--co-slate-light);
+  color: var(--co-accent-hover);
+  padding-left: 1.25rem;
+}
+
+.sidebar-menu li.active a {
+  background-color: var(--co-accent-light);
+  color: var(--co-accent);
+  font-weight: 600;
+}
+
+.sidebar-footer {
+  margin-top: 2rem;
+  font-size: 0.8rem;
+  color: #94a3b8;
+  border-top: 1px solid var(--co-slate-border);
+  padding-top: 1.5rem;
+}
+
+/* Contingut principal */
+.main-content {
+  margin-left: var(--sidebar-width);
+  flex: 1;
+  max-width: calc(100vw - var(--sidebar-width));
+  min-height: 100vh;
+}
+
+/* Seccions */
+.section {
+  padding: 5rem 3rem;
+  background-color: var(--co-white);
+  border-bottom: 1px solid var(--co-slate-border);
+}
+
+.section:nth-child(even) {
+  background-color: var(--co-slate-light);
+}
+
+/* Secció Hero */
+.hero-section {
+  height: 80vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 3rem;
+  color: var(--co-white);
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to right, rgba(15, 23, 42, 0.5) 0%, rgba(15, 23, 42, 0.1) 100%);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: var(--max-content-width);
+  margin: 0 auto;
+  width: 100%;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.hero-tagline {
+  font-family: var(--font-title);
+  color: var(--co-accent);
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 1rem;
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  color: var(--co-white);
+  line-height: 1.15;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.8);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding-top: 1.5rem;
+  max-width: 600px;
+}
+
+.hero-meta-item strong {
+  color: var(--co-white);
+}
+
+/* Contenidors de seccions */
+.section-container {
+  max-width: var(--max-content-width);
+  margin: 0 auto;
+}
+
+/* Quadres climatològics / Targetes de dades */
+.grid-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.card {
+  background-color: var(--co-white);
+  border: 1px solid var(--co-slate-border);
+  border-radius: 12px;
+  padding: 1.75rem;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-speed);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--co-accent);
+}
+
+.card-title {
+  font-size: 1.1rem;
+  color: var(--co-slate-dark);
+  font-weight: 600;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-accent-num {
+  font-family: var(--font-title);
+  font-size: 2.2rem;
+  color: var(--co-accent);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+/* Taula interactiva */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 12px;
+  border: 1px solid var(--co-slate-border);
+  margin: 2rem 0;
+  box-shadow: var(--shadow-sm);
+  background-color: var(--co-white);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.95rem;
+}
+
+th {
+  background-color: var(--co-slate-dark);
+  color: var(--co-white);
+  padding: 1rem 1.25rem;
+  font-family: var(--font-title);
+  font-weight: 500;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  white-space: nowrap;
+}
+
+th.sort-asc::after {
+  content: ' ▲';
+  font-size: 0.75rem;
+}
+
+th.sort-desc::after {
+  content: ' ▼';
+  font-size: 0.75rem;
+}
+
+td {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--co-slate-border);
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tr:hover td {
+  background-color: var(--co-slate-light);
+}
+
+/* Cercador i botons de filtre */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  background-color: var(--co-white);
+  padding: 1.25rem;
+  border: 1px solid var(--co-slate-border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+}
+
+.search-input {
+  flex: 1;
+  min-width: 250px;
+  padding: 0.75rem 1.25rem;
+  border: 1px solid var(--co-slate-border);
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color var(--transition-speed);
+}
+
+.search-input:focus {
+  border-color: var(--co-accent);
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn {
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  border: 1px solid var(--co-slate-border);
+  background-color: var(--co-white);
+  color: var(--co-slate-medium);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all var(--transition-speed);
+  font-family: var(--font-title);
+}
+
+.btn:hover {
+  background-color: var(--co-slate-light);
+  color: var(--co-slate-dark);
+}
+
+.btn.active {
+  background-color: var(--co-accent);
+  border-color: var(--co-accent);
+  color: var(--co-white);
+}
+
+.btn-sm-map {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8rem;
+  background-color: var(--co-accent-light);
+  color: var(--co-accent);
+  border: 1px solid rgba(194, 120, 88, 0.2);
+  border-radius: 4px;
+  margin-left: 0.5rem;
+  font-weight: 500;
+}
+
+/* Llistat de rutes */
+.routes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.route-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--co-white);
+  border: 1px solid var(--co-slate-border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-speed);
+}
+
+.route-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--co-accent);
+}
+
+.route-header {
+  padding: 1.25rem;
+  background-color: var(--co-slate-dark);
+  color: var(--co-white);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.route-type-badge {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.route-type-hiking {
+  background-color: #10b981;
+  color: var(--co-white);
+}
+
+.route-type-btt {
+  background-color: #3b82f6;
+  color: var(--co-white);
+}
+
+.route-body {
+  padding: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.route-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--co-slate-dark);
+}
+
+.route-desc {
+  font-size: 0.9rem;
+  color: var(--co-slate-medium);
+  margin-bottom: 1.25rem;
+  flex: 1;
+  line-height: 1.5;
+}
+
+.route-details {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid var(--co-slate-border);
+  padding-top: 1rem;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+/* Secció Cadastre i Urbanisme */
+.cadastre-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  margin-top: 2rem;
+}
+
+.cadastre-graphics {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.cadastre-image-wrapper {
+  background-color: var(--co-white);
+  border: 1px solid var(--co-slate-border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.cadastre-image-wrapper img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform var(--transition-speed);
+}
+
+.cadastre-image-wrapper:hover img {
+  transform: scale(1.02);
+}
+
+.cadastre-image-desc {
+  padding: 0.75rem 1rem;
+  background-color: var(--co-slate-light);
+  border-top: 1px solid var(--co-slate-border);
+  font-size: 0.85rem;
+  font-style: italic;
+  text-align: center;
+}
+
+.cadastre-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cadastre-info-block {
+  margin-bottom: 2rem;
+}
+
+.cadastre-info-block:last-child {
+  margin-bottom: 0;
+}
+
+.cadastre-info-block h4 {
+  font-family: var(--font-title);
+  font-size: 1.2rem;
+  color: var(--co-slate-dark);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cadastre-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.cadastre-list li {
+  position: relative;
+  padding-left: 1.25rem;
+}
+
+.cadastre-list li::before {
+  content: '▪';
+  position: absolute;
+  left: 0;
+  color: var(--co-accent);
+}
+
+/* Detalls arquitectònics */
+.arch-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  margin-top: 2rem;
+}
+
+.arch-text-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.arch-image-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.arch-accordion-item {
+  border: 1px solid var(--co-slate-border);
+  border-radius: 12px;
+  background-color: var(--co-white);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 1rem;
+  transition: all var(--transition-speed);
+}
+
+.arch-accordion-header {
+  padding: 1.25rem 1.5rem;
+  background-color: var(--co-white);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+}
+
+.arch-accordion-header h4 {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.arch-accordion-icon {
+  transition: transform var(--transition-speed);
+  font-size: 0.8rem;
+}
+
+.arch-accordion-item.active {
+  border-color: var(--co-accent);
+}
+
+.arch-accordion-item.active .arch-accordion-icon {
+  transform: rotate(180deg);
+}
+
+.arch-accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--transition-speed) ease-out;
+  background-color: var(--co-slate-light);
+  border-top: 0 solid var(--co-slate-border);
+}
+
+.arch-accordion-item.active .arch-accordion-content {
+  border-top-width: 1px;
+}
+
+.arch-accordion-inner {
+  padding: 1.5rem;
+}
+
+/* Galeria d'imatges interactiva */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.gallery-item {
+  position: relative;
+  aspect-ratio: 4/3;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  background-color: var(--co-slate-dark);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform var(--transition-speed), filter var(--transition-speed);
+}
+
+.gallery-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(15, 23, 42, 0.4);
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--co-white);
+  font-family: var(--font-title);
+  font-size: 1.1rem;
+  transition: opacity var(--transition-speed);
+  z-index: 2;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.08);
+  filter: brightness(0.7);
+}
+
+.gallery-item:hover .gallery-overlay {
+  opacity: 1;
+}
+
+.gallery-number {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 0.5rem;
+  background-color: rgba(15, 23, 42, 0.7);
+  color: var(--co-white);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  z-index: 1;
+}
+
+/* Lightbox de la Galeria */
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(15, 23, 42, 0.95);
+  z-index: 2000;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 2rem;
+}
+
+.lightbox-content-wrapper {
+  position: relative;
+  max-width: 900px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: -3rem;
+  right: 0;
+  color: var(--co-white);
+  font-size: 2.5rem;
+  cursor: pointer;
+  transition: color var(--transition-speed);
+}
+
+.lightbox-close:hover {
+  color: var(--co-accent);
+}
+
+.lightbox-image {
+  max-width: 100%;
+  max-height: 70vh;
+  border-radius: 8px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  object-fit: contain;
+}
+
+.lightbox-desc {
+  color: rgba(255, 255, 255, 0.9);
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 1.05rem;
+  max-width: 600px;
+  background-color: rgba(15, 23, 42, 0.6);
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+}
+
+.lightbox-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--co-white);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  transition: all var(--transition-speed);
+  user-select: none;
+}
+
+.lightbox-nav-btn:hover {
+  background-color: var(--co-accent);
+  border-color: var(--co-accent);
+}
+
+.lightbox-prev {
+  left: -4rem;
+}
+
+.lightbox-next {
+  right: -4rem;
+}
+
+/* Llista de Referències */
+.ref-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.ref-item {
+  background-color: var(--co-white);
+  border: 1px solid var(--co-slate-border);
+  padding: 1.25rem;
+  border-radius: 10px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.ref-item h4 {
+  font-size: 1.05rem;
+  color: var(--co-slate-dark);
+}
+
+.ref-item p {
+  margin-bottom: 0;
+  font-size: 0.9rem;
+  color: #64748b;
+  text-align: left;
+}
+
+.ref-item a {
+  align-self: flex-start;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ref-item a::after {
+  content: '↗';
+}
+
+/* Responsivitat mòbil (Smartphone i Tablet petita) */
+@media (max-width: 1024px) {
+  .menu-toggle {
+    display: flex;
+  }
+  
+  .sidebar {
+    transform: translateX(-100%);
+    box-shadow: var(--shadow-lg);
+  }
+  
+  .sidebar.active {
+    transform: translateX(0);
+  }
+  
+  .main-content {
+    margin-left: 0;
+    max-width: 100vw;
+  }
+  
+  .section {
+    padding: 4rem 1.5rem;
+  }
+  
+  .hero-section {
+    height: 70vh;
+    padding: 1.5rem;
+  }
+  
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .cadastre-layout, .arch-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .lightbox-prev {
+    left: 1rem;
+    z-index: 10;
+  }
+  
+  .lightbox-next {
+    right: 1rem;
+    z-index: 10;
+  }
+  
+  .lightbox-close {
+    top: 1rem;
+    right: 1.5rem;
+    z-index: 10;
+  }
+  
+  .lightbox-desc {
+    font-size: 0.95rem;
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-title {
+    font-size: 2.1rem;
+  }
+  
+  .hero-meta {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .search-input {
+    width: 100%;
+  }
+  
+  .filter-buttons {
+    justify-content: space-between;
+  }
+}
+
+/* Estils per a imatges ampliables fora de la galeria */
+.zoomable-img {
+  cursor: pointer;
+  transition: transform var(--transition-speed) ease, filter var(--transition-speed) ease;
+}
+
+.zoomable-img:hover {
+  transform: scale(1.02);
+  filter: brightness(0.95);
+}
+
+/* Enllaços interns a imatges de la galeria */
+.image-ref {
+  color: var(--co-accent);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px dashed var(--co-accent);
+  transition: all var(--transition-speed) ease;
+  padding: 0 2px;
+  display: inline-block;
+}
+
+.image-ref:hover {
+  color: var(--co-accent-hover);
+  background-color: var(--co-accent-light);
+  border-bottom-style: solid;
+  border-radius: 4px;
+}
+
+/* Evitar salts de línia a la columna d'altitud i distància */
+#peaks-table td:nth-child(2),
+#peaks-table td:nth-child(3) {
+  white-space: nowrap;
+}
+
