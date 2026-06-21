@@ -584,6 +584,7 @@ tr:hover td {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  align-items: center;
 }
 
 .cadastre-image-wrapper {
@@ -592,6 +593,8 @@ tr:hover td {
   border-radius: 12px;
   overflow: hidden;
   box-shadow: var(--shadow-sm);
+  max-width: 320px;
+  width: 100%;
 }
 
 .cadastre-image-wrapper img {
